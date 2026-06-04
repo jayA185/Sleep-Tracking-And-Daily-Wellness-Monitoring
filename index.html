@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NindraSync — Wellness Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Serif+Display:ital@0;1&family=Tiro+Devanagari+Sanskrit&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ===== AUTH SCREEN ===== -->
+<div id="authScreen">
+
+  <!-- Stars background -->
+  <div class="stars" id="starsContainer"></div>
+
+  <!-- Floating diyas -->
+  <div class="diya" style="left:8%;top:15%;--dur:5s;">🪔</div>
+  <div class="diya" style="right:10%;top:25%;--dur:7s;animation-delay:-2s;">🪔</div>
+  <div class="diya" style="left:15%;bottom:20%;--dur:6s;animation-delay:-1s;">🪔</div>
+  <div class="diya" style="right:8%;bottom:15%;--dur:8s;animation-delay:-3s;">🪔</div>
+  <div class="diya" style="left:40%;top:8%;--dur:5.5s;animation-delay:-0.5s;font-size:18px;">✨</div>
+  <div class="diya" style="right:30%;bottom:8%;--dur:4.5s;animation-delay:-1.5s;font-size:18px;">✨</div>
+
+  <!-- Lotus petals -->
+  <div class="petal" style="left:15%;--dur:9s;--delay:0s;"></div>
+  <div class="petal" style="left:35%;--dur:11s;--delay:2s;transform:rotate(60deg);"></div>
+  <div class="petal" style="left:55%;--dur:8s;--delay:1s;transform:rotate(120deg);background:linear-gradient(135deg,#A78BFA,#7C3AED);"></div>
+  <div class="petal" style="left:75%;--dur:13s;--delay:3s;"></div>
+  <div class="petal" style="left:85%;--dur:10s;--delay:0.5s;transform:rotate(90deg);"></div>
+
+  <!-- Mandala backgrounds -->
+  <div class="mandala-bg mandala-1">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <circle cx="200" cy="200" r="190" stroke="#F97316" stroke-width="1" stroke-dasharray="8 4"/>
+      <circle cx="200" cy="200" r="150" stroke="#F97316" stroke-width="1.5" stroke-dasharray="4 8"/>
+      <circle cx="200" cy="200" r="110" stroke="#D97706" stroke-width="1" stroke-dasharray="6 6"/>
+      <circle cx="200" cy="200" r="70"  stroke="#7C3AED" stroke-width="1.5" stroke-dasharray="3 9"/>
+      <circle cx="200" cy="200" r="30"  stroke="#F97316" stroke-width="2"/>
+      <g stroke="#F97316" stroke-width="1" opacity="0.7">
+        <line x1="200" y1="10" x2="200" y2="390"/>
+        <line x1="10"  y1="200" x2="390" y2="200"/>
+        <line x1="54"  y1="54"  x2="346" y2="346"/>
+        <line x1="346" y1="54"  x2="54"  y2="346"/>
+        <line x1="27"  y1="127" x2="373" y2="273"/>
+        <line x1="127" y1="27"  x2="273" y2="373"/>
+        <line x1="373" y1="127" x2="27"  y2="273"/>
+        <line x1="273" y1="27"  x2="127" y2="373"/>
+      </g>
+      <g fill="#F97316" opacity="0.3">
+        <ellipse cx="200" cy="120" rx="15" ry="30" transform="rotate(0 200 200)"/>
+        <ellipse cx="200" cy="120" rx="15" ry="30" transform="rotate(45 200 200)"/>
+        <ellipse cx="200" cy="120" rx="15" ry="30" transform="rotate(90 200 200)"/>
+        <ellipse cx="200" cy="120" rx="15" ry="30" transform="rotate(135 200 200)"/>
+        <ellipse cx="200" cy="120" rx="15" ry="30" transform="rotate(180 200 200)"/>
+        <ellipse cx="200" cy="120" rx="15" ry="30" transform="rotate(225 200 200)"/>
+        <ellipse cx="200" cy="120" rx="15" ry="30" transform="rotate(270 200 200)"/>
+        <ellipse cx="200" cy="120" rx="15" ry="30" transform="rotate(315 200 200)"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="mandala-bg mandala-2">
+    <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <circle cx="150" cy="150" r="140" stroke="#7C3AED" stroke-width="1" stroke-dasharray="6 3"/>
+      <circle cx="150" cy="150" r="100" stroke="#F97316" stroke-width="1" stroke-dasharray="4 6"/>
+      <circle cx="150" cy="150" r="60"  stroke="#7C3AED" stroke-width="1.5" stroke-dasharray="3 5"/>
+      <g stroke="#7C3AED" stroke-width="0.8" opacity="0.8">
+        <line x1="150" y1="10" x2="150" y2="290"/>
+        <line x1="10"  y1="150" x2="290" y2="150"/>
+        <line x1="40"  y1="40"  x2="260" y2="260"/>
+        <line x1="260" y1="40"  x2="40"  y2="260"/>
+      </g>
+    </svg>
+  </div>
+
+  <div class="auth-scene">
+    <div class="auth-card">
+      <div class="auth-logo">
+        <div class="auth-logo-icon"><i class="fa-solid fa-moon"></i></div>
+        <div>
+          <div class="auth-logo-text">NindraSync</div>
+          <div class="auth-logo-devanagari">निन्द्रासिंक — Wellness Tracker</div>
+        </div>
+      </div>
+
+      <div class="rangoli-dots">
+        <div class="rdot"></div><div class="rdot"></div><div class="rdot"></div>
+        <div class="rdot"></div><div class="rdot"></div>
+      </div>
+
+      <div class="auth-tabs">
+        <div class="auth-tab active" onclick="switchAuthTab('login')">Login</div>
+        <div class="auth-tab" onclick="switchAuthTab('signup')">Sign Up</div>
+      </div>
+
+      <div class="auth-form">
+        <!-- LOGIN FORM -->
+        <div id="loginForm" class="auth-form-section active">
+          <div id="loginError" class="auth-error"><i class="fa-solid fa-circle-exclamation"></i><span id="loginErrMsg">Invalid email or password.</span></div>
+          <div class="form-group">
+            <div class="form-label">Email</div>
+            <div class="form-input-wrap">
+              <i class="fa-regular fa-envelope"></i>
+              <input class="form-input" id="loginEmail" type="email" placeholder="you@example.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label">Password</div>
+            <div class="form-input-wrap">
+              <i class="fa-solid fa-lock"></i>
+              <input class="form-input" id="loginPass" type="password" placeholder="Enter your password">
+              <i class="input-toggle fa-regular fa-eye" onclick="togglePass('loginPass',this)"></i>
+            </div>
+          </div>
+          <div class="forgot-link" onclick="forgotPass()">Forgot password?</div>
+          <button class="auth-btn" onclick="handleLogin()"><i class="fa-solid fa-arrow-right-to-bracket" style="margin-right:8px;"></i>Log In</button>
+          <div class="auth-divider"><span>New here?</span></div>
+          <button class="auth-btn" style="background:var(--surface2);color:var(--text);border:1.5px solid var(--border);box-shadow:none;" onclick="switchAuthTab('signup')">Create Account</button>
+        </div>
+
+        <!-- SIGNUP FORM -->
+        <div id="signupForm" class="auth-form-section">
+          <div id="signupError" class="auth-error"><i class="fa-solid fa-circle-exclamation"></i><span id="signupErrMsg">Please fill all fields.</span></div>
+          <div id="signupSuccess" class="auth-success"><i class="fa-solid fa-circle-check"></i><span>Account created! Please log in.</span></div>
+          <div class="form-group">
+            <div class="form-label">Your Name</div>
+            <div class="form-input-wrap">
+              <i class="fa-regular fa-user"></i>
+              <input class="form-input" id="signupFirst" type="text" placeholder="John Smith" style="width:100%;min-width:0;">
+              <input type="hidden" id="signupLast" value="">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label">Email</div>
+            <div class="form-input-wrap">
+              <i class="fa-regular fa-envelope"></i>
+              <input class="form-input" id="signupEmail" type="email" placeholder="you@example.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label">Password</div>
+            <div class="form-input-wrap">
+              <i class="fa-solid fa-lock"></i>
+              <input class="form-input" id="signupPass" type="password" placeholder="At least 6 characters">
+              <i class="input-toggle fa-regular fa-eye" onclick="togglePass('signupPass',this)"></i>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label">Confirm Password</div>
+            <div class="form-input-wrap">
+              <i class="fa-solid fa-lock"></i>
+              <input class="form-input" id="signupPass2" type="password" placeholder="Re-enter password">
+            </div>
+          </div>
+          <button class="auth-btn" onclick="handleSignup()"><i class="fa-solid fa-user-plus" style="margin-right:8px;"></i>Create Account</button>
+          <div class="auth-divider"><span>Already have an account?</span></div>
+          <button class="auth-btn" style="background:var(--surface2);color:var(--text);border:1.5px solid var(--border);box-shadow:none;" onclick="switchAuthTab('login')">Log In</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /authScreen -->
+
+
+<!-- ===== MAIN APP ===== -->
+<div id="appScreen">
+<div class="app">
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <div class="logo">
+    <div class="logo-icon"><i class="fa-solid fa-moon"></i></div>
+    <div>
+      <div class="logo-text">NindraSync</div>
+      <div class="logo-sub">Wellness Tracker</div>
+    </div>
+  </div>
+
+  <div class="nav-label">Main</div>
+  <div class="nav-item active" data-page="dashboard"><i class="fa-solid fa-gauge-high"></i><span>Dashboard</span></div>
+  <div class="nav-item" data-page="sleeplog"><i class="fa-solid fa-bed"></i><span>Sleep Log</span></div>
+  <div class="nav-item" data-page="vitals"><i class="fa-solid fa-heart-pulse"></i><span>Vitals</span></div>
+  <div class="nav-item" data-page="trends"><i class="fa-solid fa-chart-line"></i><span>Trends</span></div>
+
+  <div class="nav-label">Wellness</div>
+  <div class="nav-item" data-page="activity"><i class="fa-solid fa-dumbbell"></i><span>Activity</span></div>
+  <div class="nav-item" data-page="hydration"><i class="fa-solid fa-droplet"></i><span>Hydration</span></div>
+  <div class="nav-item" data-page="nutrition"><i class="fa-solid fa-apple-whole"></i><span>Nutrition</span></div>
+  <div class="nav-item" data-page="mind"><i class="fa-solid fa-brain"></i><span>Mind</span></div>
+
+  <div class="nav-label">Account</div>
+  <div class="nav-item" data-page="settings"><i class="fa-solid fa-gear"></i><span>Settings</span></div>
+
+  <div class="sidebar-bottom">
+    <div class="avatar" onclick="navigateTo('settings')">
+      <div class="avatar-circle" id="sidebarAvatar">NS</div>
+      <div>
+        <div class="avatar-name" id="sidebarName">Loading...</div>
+        <div class="avatar-role">🪔 Premium Plan</div>
+      </div>
+    </div>
+    <div class="logout-btn" onclick="handleLogout()">
+      <i class="fa-solid fa-right-from-bracket"></i><span>Logout</span>
+    </div>
+  </div>
+</aside>
+
+<!-- ========== PAGES ========== -->
+<div class="main">
+
+<!-- DASHBOARD PAGE -->
+<div class="page active" id="page-dashboard">
+  <div class="topbar">
+    <div>
+      <div class="page-title" id="greetingTitle">Good Morning 🌅</div>
+      <div class="page-sub"><span class="live-dot"></span>Live tracking active · Last synced 2 min ago</div>
+    </div>
+    <div class="topbar-right">
+      <div class="date-badge"><i class="fa-regular fa-calendar" style="margin-right:6px;"></i><span id="todayDate"></span></div>
+      <div class="notif-btn"><i class="fa-regular fa-bell"></i><div class="notif-dot"></div></div>
+    </div>
+  </div>
+
+  <div class="hero-grid">
+    <div class="hero-card accent">
+      <div class="hc-icon hc-icon-white"><i class="fa-solid fa-moon"></i></div>
+      <div class="hc-label">Last Night's Sleep</div>
+      <div class="hc-val" id="dashSleepVal">—</div>
+      <div class="hc-sub" id="dashSleepSub">Log your first sleep entry</div>
+      <div class="hc-badge" style="background:rgba(255,255,255,0.2);color:#fff;"><i class="fa-solid fa-arrow-trend-up" style="font-size:10px;"></i> Track your sleep</div>
+    </div>
+    <div class="hero-card">
+      <div class="hc-icon hc-icon-mint"><i class="fa-solid fa-fire-flame-curved"></i></div>
+      <div class="hc-label">Wellness Score</div>
+      <div class="hc-val">84</div>
+      <div class="hc-sub">Out of 100 · Excellent</div>
+      <div class="hc-badge badge-green"><i class="fa-solid fa-arrow-up" style="font-size:9px;"></i> +6 pts</div>
+    </div>
+    <div class="hero-card">
+      <div class="hc-icon hc-icon-amber"><i class="fa-solid fa-person-walking"></i></div>
+      <div class="hc-label">Today's Steps</div>
+      <div class="hc-val">6,210</div>
+      <div class="hc-sub">Goal: 10,000 steps</div>
+      <div class="hc-badge badge-blue">62% of goal</div>
+    </div>
+  </div>
+
+  <div class="section-row">
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Sleep Duration</div><div class="card-sub">Weekly overview</div></div>
+        <div class="pill-tabs" id="chartTabs">
+          <div class="pill-tab active" data-period="week">Week</div>
+          <div class="pill-tab" data-period="month">Month</div>
+          <div class="pill-tab" data-period="year">Year</div>
+        </div>
+      </div>
+      <div class="bar-chart" id="barChart"></div>
+      <div style="display:flex;justify-content:space-between;margin-top:10px;font-size:11px;color:var(--text3);">
+        <span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--saffron);margin-right:4px;vertical-align:middle;"></span>Sleep hrs</span>
+        <span><span style="display:inline-block;width:8px;height:8px;border-radius:2px;background:var(--accent);opacity:0.5;margin-right:4px;vertical-align:middle;"></span>REM hrs</span>
+        <span style="color:var(--text2);">Avg: 7h 06m</span>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Sleep Stages</div><div class="card-sub">Last night breakdown</div></div>
+        <div style="font-size:11px;font-weight:600;color:var(--primary);background:var(--primary-soft);padding:4px 10px;border-radius:20px;">7h 24m</div>
+      </div>
+      <div class="score-ring-wrap">
+        <div class="score-ring">
+          <svg width="100" height="100" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#EDD5BC" stroke-width="12"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#C2410C" stroke-width="12" stroke-dasharray="88 163" stroke-linecap="round"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#7C3AED" stroke-width="12" stroke-dasharray="50 163" stroke-dashoffset="-88" stroke-linecap="round"/>
+            <circle cx="50" cy="50" r="40" fill="none" stroke="#059669" stroke-width="12" stroke-dasharray="25 163" stroke-dashoffset="-138" stroke-linecap="round"/>
+          </svg>
+          <div class="score-inner"><div class="score-num">84</div><div class="score-label">Quality</div></div>
+        </div>
+      </div>
+      <div class="stages">
+        <div class="stage-row"><div class="stage-dot" style="background:#C2410C;"></div><div class="stage-name">Deep Sleep</div><div class="stage-bar-bg"><div class="stage-fill" style="width:54%;background:#C2410C;"></div></div><div class="stage-pct">2h 2m</div></div>
+        <div class="stage-row"><div class="stage-dot" style="background:#7C3AED;"></div><div class="stage-name">REM Sleep</div><div class="stage-bar-bg"><div class="stage-fill" style="width:31%;background:#7C3AED;"></div></div><div class="stage-pct">1h 9m</div></div>
+        <div class="stage-row"><div class="stage-dot" style="background:#059669;"></div><div class="stage-name">Light Sleep</div><div class="stage-bar-bg"><div class="stage-fill" style="width:68%;background:#059669;"></div></div><div class="stage-pct">4h 13m</div></div>
+        <div class="stage-row"><div class="stage-dot" style="background:#D97706;"></div><div class="stage-name">Awake</div><div class="stage-bar-bg"><div class="stage-fill" style="width:8%;background:#D97706;"></div></div><div class="stage-pct">14m</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-row">
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Today's Vitals</div><div class="card-sub">Real-time monitoring</div></div>
+        <span class="live-dot"></span>
+      </div>
+      <div class="vitals-grid">
+        <div class="vital-card"><div class="vital-icon" style="background:#FEE2E2;"><i class="fa-solid fa-heart" style="color:#EF4444;font-size:13px;"></i></div><div class="vital-name">Heart Rate</div><div class="vital-val">68 <span style="font-size:13px;font-family:'Sora';">bpm</span></div><div class="vital-trend trend-up"><i class="fa-solid fa-arrow-down" style="font-size:9px;"></i> Resting</div></div>
+        <div class="vital-card"><div class="vital-icon" style="background:#DBEAFE;"><i class="fa-solid fa-lungs" style="color:#3B82F6;font-size:13px;"></i></div><div class="vital-name">SpO2</div><div class="vital-val">98<span style="font-size:13px;font-family:'Sora';">%</span></div><div class="vital-trend trend-up"><i class="fa-solid fa-check" style="font-size:9px;"></i> Optimal</div></div>
+        <div class="vital-card"><div class="vital-icon" style="background:#D1FAE5;"><i class="fa-solid fa-temperature-half" style="color:#10B981;font-size:13px;"></i></div><div class="vital-name">Body Temp</div><div class="vital-val">36.6<span style="font-size:13px;font-family:'Sora';">°C</span></div><div class="vital-trend trend-up">Normal</div></div>
+        <div class="vital-card"><div class="vital-icon" style="background:#FEF3C7;"><i class="fa-solid fa-bolt" style="color:#F59E0B;font-size:13px;"></i></div><div class="vital-name">HRV</div><div class="vital-val">52 <span style="font-size:13px;font-family:'Sora';">ms</span></div><div class="vital-trend trend-up"><i class="fa-solid fa-arrow-up" style="font-size:9px;"></i> +4 ms</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-header">
+        <div><div class="card-title">Today's Habits</div><div class="card-sub" id="habitCount">Loading...</div></div>
+      </div>
+      <div class="habit-list" id="habitList"></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:16px;">
+      <div class="card" style="flex:1;">
+        <div class="card-header"><div><div class="card-title">Mood Check-in</div><div class="card-sub">How are you feeling?</div></div></div>
+        <div class="mood-row" id="moodRow">
+          <div class="mood-btn selected" data-mood="amazing"><div class="mood-emoji">🤩</div><div class="mood-lbl">Amazing</div></div>
+          <div class="mood-btn" data-mood="good"><div class="mood-emoji">😊</div><div class="mood-lbl">Good</div></div>
+          <div class="mood-btn" data-mood="okay"><div class="mood-emoji">😐</div><div class="mood-lbl">Okay</div></div>
+          <div class="mood-btn" data-mood="tired"><div class="mood-emoji">😴</div><div class="mood-lbl">Tired</div></div>
+          <div class="mood-btn" data-mood="low"><div class="mood-emoji">😔</div><div class="mood-lbl">Low</div></div>
+        </div>
+        <div class="mood-note" id="moodNote">💡 Log your mood and build your wellness streak!</div>
+        <button class="mood-log" onclick="logMood()">Log Mood</button>
+      </div>
+      <div class="card" style="flex:1;">
+        <div class="card-header"><div class="card-title">Tonight's Plan 🪔</div><div class="card-sub">Recommended schedule</div></div>
+        <div class="schedule-list">
+          <div class="sched-item"><div class="sched-time-col"><div class="sched-time">9PM</div><div class="sched-line"></div></div><div class="sched-dot" style="background:#7C3AED;margin-top:4px;"></div><div class="sched-content"><div class="sched-name">Wind down</div><div class="sched-desc">Dim lights, no screens</div></div></div>
+          <div class="sched-item"><div class="sched-time-col"><div class="sched-time">10PM</div><div class="sched-line"></div></div><div class="sched-dot" style="background:#059669;margin-top:4px;"></div><div class="sched-content"><div class="sched-name">Bedtime</div><div class="sched-desc">For optimal 8 hours</div></div></div>
+          <div class="sched-item"><div class="sched-time-col"><div class="sched-time">6AM</div></div><div class="sched-dot" style="background:#F97316;margin-top:4px;"></div><div class="sched-content"><div class="sched-name">Wake Time</div><div class="sched-desc">Sunrise light alarm</div></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div><!-- /dashboard -->
+
+<!-- SLEEP LOG PAGE -->
+<div class="page" id="page-sleeplog">
+  <div class="topbar">
+    <div><div class="page-title">Sleep Log</div><div class="page-sub">Track and review your sleep</div></div>
+  </div>
+  <div class="sleep-log-form">
+    <div class="card-title" style="margin-bottom:18px;display:flex;align-items:center;gap:8px;">
+      <i class="fa-solid fa-plus-circle" style="color:var(--saffron);"></i> Add Sleep Entry
+    </div>
+    <div class="form-row">
+      <div class="form-field"><label>Date</label><input type="date" id="logDate"></div>
+      <div class="form-field"><label>Quality (1–5 stars)</label>
+        <select id="logQuality">
+          <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+          <option value="4">⭐⭐⭐⭐ Good</option>
+          <option value="3" selected>⭐⭐⭐ Okay</option>
+          <option value="2">⭐⭐ Poor</option>
+          <option value="1">⭐ Very Poor</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row-3">
+      <div class="form-field"><label>Bedtime</label><input type="time" id="logBedtime" value="22:30"></div>
+      <div class="form-field"><label>Wake Time</label><input type="time" id="logWake" value="06:30"></div>
+      <div class="form-field"><label>Duration (auto)</label><input type="text" id="logDuration" placeholder="Auto-calculated" readonly style="color:var(--saffron);font-weight:600;"></div>
+    </div>
+    <div class="form-field" style="margin-bottom:16px;">
+      <label>Notes (optional)</label>
+      <textarea id="logNotes" placeholder="How was your sleep? Any dreams or disturbances?"></textarea>
+    </div>
+    <button class="save-btn" onclick="saveSleepLog()"><i class="fa-solid fa-floppy-disk" style="margin-right:8px;"></i>Save Entry</button>
+  </div>
+  <div class="log-history card">
+    <div class="card-header">
+      <div><div class="card-title">Sleep History</div><div class="card-sub">Your recent entries</div></div>
+    </div>
+    <div id="logEntries"></div>
+  </div>
+</div>
+
+<!-- VITALS PAGE -->
+<div class="page" id="page-vitals">
+  <div class="topbar">
+    <div><div class="page-title">Vitals Monitor</div><div class="page-sub"><span class="live-dot"></span>Real-time data</div></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:16px;margin-bottom:20px;">
+    <div class="card" style="text-align:center;"><div style="font-size:32px;margin-bottom:8px;">❤️</div><div class="vital-name">Heart Rate</div><div style="font-family:'DM Serif Display',serif;font-size:44px;color:#EF4444;margin:8px 0;">68</div><div style="font-size:12px;color:var(--text2);">bpm · Resting</div></div>
+    <div class="card" style="text-align:center;"><div style="font-size:32px;margin-bottom:8px;">🫁</div><div class="vital-name">SpO2</div><div style="font-family:'DM Serif Display',serif;font-size:44px;color:#3B82F6;margin:8px 0;">98</div><div style="font-size:12px;color:var(--text2);">% · Optimal</div></div>
+    <div class="card" style="text-align:center;"><div style="font-size:32px;margin-bottom:8px;">🌡️</div><div class="vital-name">Body Temp</div><div style="font-family:'DM Serif Display',serif;font-size:44px;color:#10B981;margin:8px 0;">36.6</div><div style="font-size:12px;color:var(--text2);">°C · Normal</div></div>
+    <div class="card" style="text-align:center;"><div style="font-size:32px;margin-bottom:8px;">⚡</div><div class="vital-name">HRV</div><div style="font-family:'DM Serif Display',serif;font-size:44px;color:#F59E0B;margin:8px 0;">52</div><div style="font-size:12px;color:var(--text2);">ms · +4 ms today</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="margin-bottom:16px;">Vitals Summary</div>
+    <p style="color:var(--text2);font-size:13.5px;line-height:1.7;">All your vitals are in a healthy range. Resting heart rate of 68 bpm is excellent. SpO2 at 98% indicates optimal blood oxygen levels. Body temperature is normal, and HRV of 52ms suggests good recovery and stress management.</p>
+  </div>
+</div>
+
+<!-- TRENDS PAGE -->
+<div class="page" id="page-trends">
+  <div class="topbar">
+    <div><div class="page-title">Trends & Analytics</div><div class="page-sub">Aapke neend ke patterns</div></div>
+  </div>
+  <div class="trends-grid">
+    <div class="stat-big-card"><div class="stat-number">7h 06m</div><div class="stat-label">Average Neend (is hafte)</div><div class="stat-change badge-green"><i class="fa-solid fa-arrow-up" style="font-size:10px;"></i> +24 min vs pichle hafte</div></div>
+    <div class="stat-big-card"><div class="stat-number" style="color:#7C3AED;">82</div><div class="stat-label">Average Sleep Quality Score</div><div class="stat-change badge-blue">Is mahine consistent</div></div>
+    <div class="stat-big-card"><div class="stat-number" style="color:#059669;">14</div><div class="stat-label">Din Ki Sleep Streak</div><div class="stat-change badge-green"><i class="fa-solid fa-fire" style="font-size:10px;"></i> Personal best!</div></div>
+    <div class="stat-big-card"><div class="stat-number" style="color:#D97706;">10:52</div><div class="stat-label">Average Bedtime (is hafte)</div><div class="stat-change badge-green"><i class="fa-solid fa-arrow-up" style="font-size:10px;"></i> 18 min pehle</div></div>
+  </div>
+  <div class="card">
+    <div class="card-title" style="margin-bottom:16px;">Weekly Sleep Pattern</div>
+    <div class="bar-chart" id="trendsBarChart" style="height:160px;"></div>
+  </div>
+</div>
+
+<!-- ACTIVITY PAGE -->
+<div class="page" id="page-activity">
+  <div class="topbar"><div><div class="page-title">Vyayam 🏃</div><div class="page-sub">Movement & exercise tracking</div></div></div>
+  <div class="hero-grid" style="grid-template-columns:1fr 1fr 1fr;">
+    <div class="hero-card"><div class="hc-label">Today's Steps</div><div class="hc-val">6,210</div><div class="hc-sub">Lakshya: 10,000</div><div class="hc-badge badge-blue">62%</div></div>
+    <div class="hero-card"><div class="hc-label">Jalai Calories</div><div class="hc-val">420</div><div class="hc-sub">kcal</div><div class="hc-badge badge-green">On track</div></div>
+    <div class="hero-card"><div class="hc-label">Active Minutes</div><div class="hc-val">34</div><div class="hc-sub">Lakshya: 45 min</div><div class="hc-badge badge-blue">76%</div></div>
+  </div>
+  <div class="card"><div class="card-title" style="margin-bottom:12px;">Today's Activities</div>
+    <div style="color:var(--text2);font-size:13.5px;display:flex;flex-direction:column;gap:12px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--surface2);border-radius:10px;"><span style="font-size:24px;">🚶</span><div><div style="font-weight:600;">Morning Walk</div><div style="font-size:12px;color:var(--text3);">7:00 AM · 20 min · 2,100 steps</div></div></div>
+      <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--surface2);border-radius:10px;"><span style="font-size:24px;">🧘</span><div><div style="font-weight:600;">Yoga Practice</div><div style="font-size:12px;color:var(--text3);">8:00 AM · 30 min · 180 kcal</div></div></div>
+    </div>
+  </div>
+</div>
+
+<!-- HYDRATION PAGE -->
+<div class="page" id="page-hydration">
+  <div class="topbar"><div><div class="page-title">Hydration 💧</div><div class="page-sub">Track your water intake</div></div></div>
+  <div class="card" style="text-align:center;padding:40px;">
+    <div style="font-size:60px;margin-bottom:16px;">💧</div>
+    <div style="font-family:'DM Serif Display',serif;font-size:56px;color:var(--primary);">5</div>
+    <div style="font-size:14px;color:var(--text2);margin:8px 0;">5 of 8 glasses today</div>
+    <div style="width:200px;height:8px;background:var(--surface2);border-radius:4px;margin:16px auto;overflow:hidden;">
+      <div style="width:62.5%;height:100%;background:linear-gradient(90deg,#F97316,#3B82F6);border-radius:4px;"></div>
+    </div>
+    <button class="save-btn" style="margin-top:16px;" onclick="showToast('💧 One glass of water logged!','success')">+ Log Glass</button>
+  </div>
+</div>
+
+<!-- NUTRITION PAGE -->
+<div class="page" id="page-nutrition">
+  <div class="topbar"><div><div class="page-title">Nutrition 🥗</div><div class="page-sub">Diet & food tracking</div></div></div>
+  <div class="hero-grid" style="grid-template-columns:1fr 1fr 1fr;">
+    <div class="hero-card"><div class="hc-label">Calories</div><div class="hc-val">1,840</div><div class="hc-sub">Goal: 2,200 kcal</div></div>
+    <div class="hero-card"><div class="hc-label">Protein</div><div class="hc-val">82g</div><div class="hc-sub">Goal: 120g</div></div>
+    <div class="hero-card"><div class="hc-label">Carbs</div><div class="hc-val">210g</div><div class="hc-sub">Goal: 250g</div></div>
+  </div>
+  <div class="card"><div class="card-title" style="margin-bottom:4px;">Today's Meals</div><div style="color:var(--text3);font-size:13px;margin-top:8px;">Connect your nutrition app to view meals.</div></div>
+</div>
+
+<!-- MIND PAGE -->
+<div class="page" id="page-mind">
+  <div class="topbar"><div><div class="page-title">Mind & Meditation 🧘</div><div class="page-sub">Mental wellness tracking</div></div></div>
+  <div class="hero-grid" style="grid-template-columns:1fr 1fr;">
+    <div class="hero-card accent"><div class="hc-label">Meditation Streak</div><div class="hc-val">12 days</div><div class="hc-sub">Keep it up!</div></div>
+    <div class="hero-card"><div class="hc-label">Stress Level</div><div class="hc-val">Kam</div><div class="hc-sub">From HRV & patterns</div><div class="hc-badge badge-green">Optimal</div></div>
+  </div>
+  <div class="card"><div class="card-title" style="margin-bottom:12px;">Today's Practice</div>
+    <div style="display:flex;flex-direction:column;gap:10px;">
+      <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--surface2);border-radius:10px;"><span style="font-size:24px;">🧘</span><div><div style="font-weight:600;">Morning Meditation</div><div style="font-size:12px;color:var(--text3);">7:30 AM · 10 min · Complete</div></div><div class="hc-badge badge-green" style="margin-left:auto;margin-top:0;">✓</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SETTINGS PAGE -->
+<div class="page" id="page-settings">
+  <div class="topbar"><div><div class="page-title">Settings ⚙️</div><div class="page-sub">Manage your account & preferences</div></div></div>
+
+  <div class="settings-section">
+    <div class="settings-title"><i class="fa-solid fa-user-circle"></i> Profile</div>
+    <div class="setting-row">
+      <div class="setting-info"><label>Full Name</label><p>Your display name</p></div>
+      <input class="settings-input" id="settingsName" type="text" placeholder="Your Name">
+    </div>
+    <div class="setting-row">
+      <div class="setting-info"><label>Email</label><p>Account email</p></div>
+      <input class="settings-input" id="settingsEmail" type="email" readonly style="opacity:0.6;cursor:not-allowed;">
+    </div>
+    <div class="setting-row">
+      <div class="setting-info"><label>Sleep Goal</label><p>Target sleep duration</p></div>
+      <select class="settings-input" id="settingsSleepGoal">
+        <option value="6">6 hours</option>
+        <option value="7">7 hours</option>
+        <option value="8" selected>8 hours</option>
+        <option value="9">9 hours</option>
+      </select>
+    </div>
+    <div style="margin-top:16px;">
+      <button class="save-btn" onclick="saveSettings()">Save Profile</button>
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <div class="settings-title"><i class="fa-solid fa-bell"></i> Notifications</div>
+    <div class="setting-row">
+      <div class="setting-info"><label>Bedtime Reminder</label><p>Notification 30 min before bedtime</p></div>
+      <label class="toggle"><input type="checkbox" checked id="toggleBedtime"><div class="toggle-slider"></div></label>
+    </div>
+    <div class="setting-row">
+      <div class="setting-info"><label>Morning Report</label><p>Daily sleep report on wake-up</p></div>
+      <label class="toggle"><input type="checkbox" checked id="toggleMorning"><div class="toggle-slider"></div></label>
+    </div>
+    <div class="setting-row">
+      <div class="setting-info"><label>Habit Reminders</label><p>Daily habit tracking reminders</p></div>
+      <label class="toggle"><input type="checkbox" id="toggleHabits"><div class="toggle-slider"></div></label>
+    </div>
+  </div>
+
+  <div class="settings-section">
+    <div class="settings-title"><i class="fa-solid fa-triangle-exclamation" style="color:var(--coral);"></i> Danger Zone</div>
+    <div class="setting-row">
+      <div class="setting-info"><label>Clear All Data</label><p>Delete all sleep logs</p></div>
+      <button class="danger-btn" onclick="clearAllData()">Clear Data</button>
+    </div>
+    <div class="setting-row">
+      <div class="setting-info"><label>Delete Account</label><p>Permanently remove your account</p></div>
+      <button class="danger-btn" onclick="deleteAccount()">Delete Account</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /main -->
+</div><!-- /app -->
+</div><!-- /appScreen -->
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
