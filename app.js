@@ -5,19 +5,9 @@
 
 const API = 'http://localhost:3000/api';
 
-// ─── Token helpers ─────────────────────────────────────────
-function getToken()        { return localStorage.getItem('ns_token'); }
-function setToken(t)       { localStorage.setItem('ns_token', t); }
-function clearToken()      { localStorage.removeItem('ns_token'); }
-function getLocalUser()    { try{ return JSON.parse(localStorage.getItem('ns_user')); }catch{ return null; } }
-function setLocalUser(u)   { localStorage.setItem('ns_user', JSON.stringify(u)); }
-function clearLocalUser()  { localStorage.removeItem('ns_user'); }
-
-// ─── API fetch wrapper ─────────────────────────────────────
+// ─── API fetch wrapper (no auth token) ────────────────────
 async function apiFetch(path, method='GET', body=null) {
   const headers = { 'Content-Type': 'application/json' };
-  const token = getToken();
-  if (token) headers['Authorization'] = 'Bearer ' + token;
   const opts = { method, headers };
   if (body) opts.body = JSON.stringify(body);
   const res  = await fetch(API + path, opts);
@@ -27,114 +17,20 @@ async function apiFetch(path, method='GET', body=null) {
 }
 
 // ============================================================
-//  STARS GENERATOR (auth screen)
+//  INIT — no auth, direct app load
 // ============================================================
-(function(){
-  const container = document.getElementById('starsContainer');
-  if (!container) return;
-  for (let i = 0; i < 80; i++) {
-    const star = document.createElement('div');
-    star.className = 'star';
-    const size = Math.random()*3+1;
-    star.style.cssText = `width:${size}px;height:${size}px;left:${Math.random()*100}%;top:${Math.random()*100}%;--dur:${Math.random()*3+2}s;animation-delay:${Math.random()*4}s;`;
-    container.appendChild(star);
-  }
-})();
 
-// ============================================================
-//  AUTH
-// ============================================================
-function switchAuthTab(tab) {
-  document.querySelectorAll('.auth-tab').forEach((t, i) => {
-    t.classList.toggle('active', (i===0&&tab==='login')||(i===1&&tab==='signup'));
-  });
-  document.getElementById('loginForm').classList.toggle('active', tab==='login');
-  document.getElementById('signupForm').classList.toggle('active', tab==='signup');
-  hideAuthMessages();
-}
-
-function hideAuthMessages() {
-  ['loginError','signupError','signupSuccess'].forEach(id => {
-    document.getElementById(id).classList.remove('show');
-  });
-}
-
-function togglePass(inputId, icon) {
-  const inp = document.getElementById(inputId);
-  if (inp.type==='password') { inp.type='text'; icon.className='input-toggle fa-regular fa-eye-slash'; }
-  else { inp.type='password'; icon.className='input-toggle fa-regular fa-eye'; }
-}
-
-async function handleLogin() {
-  const email = document.getElementById('loginEmail').value.trim().toLowerCase();
-  const pass  = document.getElementById('loginPass').value;
-  const errEl  = document.getElementById('loginError');
-  const errMsg = document.getElementById('loginErrMsg');
-
-  if (!email || !pass) { errMsg.textContent='Please enter your email and password.'; errEl.classList.add('show'); return; }
-
-  try {
-    const data = await apiFetch('/auth/login', 'POST', { email, password: pass });
-    setToken(data.token);
-    setLocalUser(data.user);
-    showApp();
-  } catch (err) {
-    errMsg.textContent = err.message;
-    errEl.classList.add('show');
-  }
-}
-
-async function handleSignup() {
-  const firstName = document.getElementById('signupFirst').value.trim();
-  const email     = document.getElementById('signupEmail').value.trim().toLowerCase();
-  const pass      = document.getElementById('signupPass').value;
-  const pass2     = document.getElementById('signupPass2').value;
-  const errEl     = document.getElementById('signupError');
-  const errMsg    = document.getElementById('signupErrMsg');
-  const succEl    = document.getElementById('signupSuccess');
-
-  hideAuthMessages();
-  if (!firstName || !email || !pass) { errMsg.textContent='Please fill all fields.'; errEl.classList.add('show'); return; }
-  if (pass.length < 6) { errMsg.textContent='Password must be at least 6 characters.'; errEl.classList.add('show'); return; }
-  if (pass !== pass2)  { errMsg.textContent='Passwords do not match.'; errEl.classList.add('show'); return; }
-
-  try {
-    await apiFetch('/auth/signup', 'POST', { firstName, email, password: pass });
-    succEl.classList.add('show');
-    setTimeout(() => switchAuthTab('login'), 1500);
-  } catch (err) {
-    errMsg.textContent = err.message;
-    errEl.classList.add('show');
-  }
-}
-
-async function forgotPass() {
-  const email = document.getElementById('loginEmail').value.trim();
-  if (!email) { showToast('Enter your email first.', 'error'); return; }
-  try {
-    const data = await apiFetch('/auth/forgot-password', 'POST', { email });
-    showToast(data.message, 'success');
-  } catch (err) {
-    showToast(err.message, 'error');
-  }
-}
 
 // ============================================================
 //  SHOW APP
 // ============================================================
 function showApp() {
-  const user = getLocalUser();
-  document.getElementById('authScreen').style.display = 'none';
-  document.getElementById('appScreen').classList.add('visible');
-
-  if (user) {
-    const name = `${user.firstName||''} ${user.lastName||''}`.trim();
-    const initials = ((user.firstName||'')[0]||'') + ((user.lastName||'')[0]||'');
-    document.getElementById('sidebarAvatar').textContent = initials.toUpperCase() || 'U';
-    document.getElementById('sidebarName').textContent   = name || user.email;
-    document.getElementById('settingsName').value  = name;
-    document.getElementById('settingsEmail').value = user.email;
-  }
+  document.getElementById('sidebarAvatar').textContent = 'NS';
+  document.getElementById('sidebarName').textContent   = 'NindraSync User';
+  const settingsName  = document.getElementById('settingsName');
+  const settingsEmail = document.getElementById('settingsEmail');
+  if (settingsName)  settingsName.value  = 'NindraSync User';
+  if (settingsEmail) settingsEmail.value = '';
 
   setupGreeting();
   setupNavigation();
@@ -143,16 +39,6 @@ function showApp() {
   renderSleepLogs();
   loadMoodState();
   calcDuration();
-}
-
-function handleLogout() {
-  clearToken();
-  clearLocalUser();
-  document.getElementById('authScreen').style.display = 'flex';
-  document.getElementById('appScreen').classList.remove('visible');
-  document.getElementById('loginEmail').value = '';
-  document.getElementById('loginPass').value  = '';
-  hideAuthMessages();
 }
 
 // ============================================================
@@ -343,10 +229,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   calcDuration();
 
-  // Auto-login if token exists
-  const user = getLocalUser();
-  const token = getToken();
-  if (user && token) showApp();
+  // App seedha load karo — no auth needed
+  showApp();
 });
 
 async function saveSleepLog() {
@@ -436,11 +320,8 @@ async function saveSettings() {
   const parts = newName.split(' ');
 
   try {
-    await apiFetch('/user/profile', 'PUT', { firstName: parts[0]||'', lastName: parts.slice(1).join(' ')||'' });
-    const user = { ...getLocalUser(), firstName: parts[0]||'', lastName: parts.slice(1).join(' ')||'' };
-    setLocalUser(user);
     const initials = ((parts[0]||'')[0]||'') + ((parts[1]||'')[0]||'');
-    document.getElementById('sidebarAvatar').textContent = initials.toUpperCase();
+    document.getElementById('sidebarAvatar').textContent = initials.toUpperCase() || 'NS';
     document.getElementById('sidebarName').textContent   = newName;
     showToast('Settings save ho gayi! 🙏', 'success');
   } catch (err) {
@@ -460,16 +341,7 @@ async function clearAllData() {
   }
 }
 
-async function deleteAccount() {
-  if (!confirm('Kya aap sure hain? Yeh action undo nahi ho sakta.')) return;
-  try {
-    await apiFetch('/user', 'DELETE');
-    handleLogout();
-    showToast('Account delete ho gaya.', '');
-  } catch (err) {
-    showToast(err.message, 'error');
-  }
-}
+
 
 // ============================================================
 //  TOAST
